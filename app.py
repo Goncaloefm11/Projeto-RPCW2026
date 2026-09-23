@@ -1142,62 +1142,190 @@ def api_rdf_classes_fast():
     """Retorna classes que herdam de EntidadeEmissora."""
     try:
         g = load_rdf_graph()
-        
-        # Procura recursiva de subclasses de EntidadeEmissora
-        ent_emissora_uri = URIRef("http://dre.pt/ontologia#EntidadeEmissora")
-        subs = get_subclasses(g, str(ent_emissora_uri))
-        
+
+        ent_emissora_uri = URIRef(
+            "http://dre.pt/ontologia#EntidadeEmissora"
+        )
+
         result = []
-        for s in subs:
-            label = str(g.value(URIRef(s), RDFS.label) or s.split("#")[-1])
-            result.append({"uri": s, "label": label})
+        seen = set()
+
+        # Inclui a própria classe raiz
+        classes_to_process = [ent_emissora_uri]
+
+        while classes_to_process:
+            current = classes_to_process.pop(0)
+
+            if current in seen:
+                continue
+
+            seen.add(current)
+
+            # Label
+            label = g.value(current, RDFS.label)
+
+            if label:
+                label = str(label)
+            else:
+                uri = str(current)
+                label = (
+                    uri.split("#")[-1]
+                    if "#" in uri
+                    else uri.rsplit("/", 1)[-1]
+                )
+
+            result.append({
+                "uri": str(current),
+                "label": label
+            })
+
+            # Procurar subclasses diretas
+            for subclass in g.subjects(
+                RDFS.subClassOf,
+                current
+            ):
+                if subclass not in seen:
+                    classes_to_process.append(subclass)
+
+        result.sort(
+            key=lambda x: x["label"].lower()
+        )
+
         return jsonify(result)
+
     except Exception as e:
         print(f"Erro em api_rdf_classes_fast: {e}")
-        return jsonify({"error": str(e)}), 500
+
+        return jsonify({
+            "error": str(e)
+        }), 500
 
 @app.route("/api/rdf/form-options", methods=["GET"])
 def api_rdf_form_options_fast():
-    """Retorna TODAS as classes OWL e entidades para popular formulários."""
+    """Retorna todas as classes OWL e entidades para popular formulários."""
     try:
         g = load_rdf_graph()
-        
-        # ========== TODAS as classes OWL (sem filtro de hierarquia) ==========
-        all_classes = []
-        for s in g.subjects(RDF.type, OWL.Class):
-            label = str(g.value(s, RDFS.label) or s.split("#")[-1])
-            all_classes.append({"uri": str(s), "label": label})
-        
-        # Ordenar por label 
-        all_classes.sort(key=lambda x: x["label"])
-        
-        # ========== Instâncias de EntidadeEmissora e suas subclasses ==========
-        ent_emissora_uri = URIRef("http://dre.pt/ontologia#EntidadeEmissora")
-        entidades = []
-        
-        query = """
-            PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-            PREFIX dre: <http://dre.pt/ontologia#>
-            SELECT DISTINCT ?ent ?label WHERE {
-                ?ent rdf:type ?type .
-                ?type rdfs:subClassOf* dre:EntidadeEmissora .
-                OPTIONAL { ?ent rdfs:label ?label }
-            }
-        """
-        for row in g.query(query):
-            ent_uri = str(row.ent)
-            ent_label = str(row.label or ent_uri.split("#")[-1])
-            entidades.append({"uri": ent_uri, "label": ent_label})
 
+        # =========================================================
+        # 1. TODAS AS CLASSES OWL
+        # =========================================================
+        all_classes = []
+
+        for s in g.subjects(RDF.type, OWL.Class):
+            label = g.value(s, RDFS.label)
+
+            if label:
+                label = str(label)
+            else:
+                uri = str(s)
+                label = uri.split("#")[-1] if "#" in uri else uri.rsplit("/", 1)[-1]
+
+            all_classes.append({
+                "uri": str(s),
+                "label": label
+            })
+
+        # Remover duplicados
+        unique_classes = {}
+
+        for c in all_classes:
+            unique_classes[c["uri"]] = c
+
+        all_classes = list(unique_classes.values())
+
+        # Ordenar alfabeticamente
+        all_classes.sort(
+            key=lambda x: x["label"].lower()
+        )
+
+        # =========================================================
+        # 2. DESCOBRIR TODAS AS SUBCLASSES DE EntidadeEmissora
+        # =========================================================
+        ent_emissora_uri = URIRef(
+            "http://dre.pt/ontologia#EntidadeEmissora"
+        )
+
+        entity_classes = {ent_emissora_uri}
+
+        # Pesquisa recursiva sem SPARQL
+        queue = [ent_emissora_uri]
+
+        while queue:
+            parent = queue.pop(0)
+
+            for subclass in g.subjects(RDFS.subClassOf, parent):
+                if subclass not in entity_classes:
+                    entity_classes.add(subclass)
+                    queue.append(subclass)
+
+        # =========================================================
+        # 3. ENCONTRAR INSTÂNCIAS DESSAS CLASSES
+        # =========================================================
+        entidades = []
+        seen_entities = set()
+
+        for entity_class in entity_classes:
+
+            for ent in g.subjects(RDF.type, entity_class):
+
+                # Não incluir classes OWL como se fossem entidades
+                if (ent, RDF.type, OWL.Class) in g:
+                    continue
+
+                ent_uri = str(ent)
+
+                if ent_uri in seen_entities:
+                    continue
+
+                seen_entities.add(ent_uri)
+
+                # Tentar vários tipos de label
+                label = g.value(ent, RDFS.label)
+
+                if not label:
+                    nome_prop = URIRef(
+                        "http://dre.pt/ontologia#nomeEntidade"
+                    )
+                    label = g.value(ent, nome_prop)
+
+                if not label:
+                    nome_prop_alt = URIRef(
+                        "http://dre.pt/ontology#nome"
+                    )
+                    label = g.value(ent, nome_prop_alt)
+
+                if label:
+                    ent_label = str(label)
+                else:
+                    if "#" in ent_uri:
+                        ent_label = ent_uri.split("#")[-1]
+                    else:
+                        ent_label = ent_uri.rsplit("/", 1)[-1]
+
+                entidades.append({
+                    "uri": ent_uri,
+                    "label": ent_label,
+                    "tipo": str(entity_class)
+                })
+
+        entidades.sort(
+            key=lambda x: x["label"].lower()
+        )
+
+        # =========================================================
+        # 4. RESPOSTA
+        # =========================================================
         return jsonify({
-            "all_classes": all_classes,     
-            "classes_doc": all_classes,       
+            "all_classes": all_classes,
+            "classes_doc": all_classes,
             "entidades": entidades
         })
+
     except Exception as e:
         print(f"Erro em api_rdf_form_options_fast: {e}")
-        return jsonify({"error": str(e)}), 500
+        return jsonify({
+            "error": str(e)
+        }), 500
 
         
 
