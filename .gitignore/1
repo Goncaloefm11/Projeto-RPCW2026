@@ -1,8 +1,0 @@
-venv/
-.venv/
-__pycache__/
-*.pyc
-
-*.db
-*.bz2
-2024-04-14-DRE_dump.json
