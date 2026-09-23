@@ -323,7 +323,7 @@ def api_delete_rdf_classe():
         # Copiar apenas triplos de instâncias/dados
         for s, p, o in g.triples((None, None, None)):
             # Manter instâncias 
-            if (p, o) == (RDF.type, OWL.Class):
+            if (p) == (RDF.type):
                 continue
             # Manter instâncias e relacoes
             dados_graph.add((s, p, o))

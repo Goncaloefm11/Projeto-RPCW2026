@@ -1,200 +1,334 @@
-@prefix ns1: <http://dre.pt/ontology#> .
-@prefix ns2: <http://dre.pt/ontologia#> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix ns1: http://dre.pt/ontology# .
+@prefix ns2: http://dre.pt/ontologia# .
+@prefix owl: http://www.w3.org/2002/07/owl# .
+@prefix rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns# .
+@prefix rdfs: http://www.w3.org/2000/01/rdf-schema# .
+@prefix xsd: http://www.w3.org/2001/XMLSchema# .
 
-<http://dre.pt/ontology#%28IRN%2C_I.P.%29> ns1:emitiu ns1:Doc_12_20260516 .
+# ============================================================
 
-<http://dre.pt/ontology#%2BIDH_-_Associa%C3%A7%C3%A3o_para_o_Desenvolvimento_Local_de_Pa%C3%A7os_de_Ferreira> ns1:emitiu ns1:Doc_999_20260430 .
+# ENTIDADES / RELAÇÕES IMPORTADAS
 
-<http://dre.pt/ontology#-_C%C3%82MARA_MUNICIPAL_DE_VILA_VERDE_-__An%C3%BAncio> ns1:emitiu ns1:Doc_422_20260514 .
+# ============================================================
 
-ns1:1.%C2%AA_Vara_Com_Compet%C3%AAncia_Mista_do_Tribunal_da_Comarca_de_Loures ns1:emitiu ns1:Doc_12_20260516 .
+http://dre.pt/ontology#%28IRN%2C_I.P.%29
+ns1:emitiu ns1:Doc_12_20260516 .
 
-ns1:1.%C2%AA_Vara_Criminal_do_Tribunal_de_C%C3%ADrculo_de_Lisboa ns1:emitiu ns1:Doc_212_20260506 .
+http://dre.pt/ontology#%2BIDH_-_Associa%C3%A7%C3%A3o_para_o_Desenvolvimento_Local_de_Pa%C3%A7os_de_Ferreira
+ns1:emitiu ns1:Doc_999_20260430 .
 
-ns1:Doc_7039_2024_20240412 ns1:revogadoPor ns1:Doc_212_20260506 .
+http://dre.pt/ontology#-_C%C3%82MARA_MUNICIPAL_DE_VILA_VERDE_-__An%C3%BAncio
+ns1:emitiu ns1:Doc_422_20260514 .
 
-ns1:Doc_7082_2024_20240412 ns1:revogadoPor ns1:Doc_12_20260516 .
+ns1:1.%C2%AA_Vara_Com_Compet%C3%AAncia_Mista_do_Tribunal_da_Comarca_de_Loures
+ns1:emitiu ns1:Doc_12_20260516 .
 
-ns1:Doc_7085_2024_20240412 ns1:revogadoPor ns1:Doc_999_20260430 .
+ns1:1.%C2%AA_Vara_Criminal_do_Tribunal_de_C%C3%ADrculo_de_Lisboa
+ns1:emitiu ns1:Doc_212_20260506 .
 
-ns1:Doc_7087_2024_20240412 ns1:revogadoPor ns1:Doc_422_20260514 .
+# ============================================================
 
-ns1:Doc_7091_2024_20240412 ns1:revogadoPor ns1:Doc_12_20260516 .
+# RELAÇÕES ENTRE DOCUMENTOS
 
-ns1:Doc_7095_2024_20240412 ns1:revogadoPor ns1:Doc_121_20260519 .
+# ============================================================
 
-ns1:classe1 rdfs:label "classe 1"@pt ;
-    rdfs:subClassOf ns2:AtoNormativo .
+ns1:Doc_7039_2024_20240412
+ns1:revogadoPor ns1:Doc_212_20260506 .
 
-ns1:ent123 a ns1:EntidadeEmissora,
-        ns1:EntidadePublicaEmpresarial,
-        ns1:OrgaoSoberano ;
-    ns1:emitiu ns1:Doc_121_20260519 ;
-    ns1:nome "ent123" .
+ns1:Doc_7082_2024_20240412
+ns1:revogadoPor ns1:Doc_12_20260516 .
 
-ns1:nova_entidade_1 a ns2:Ministerio ;
-    ns1:nome "nova entidade 1" .
+ns1:Doc_7085_2024_20240412
+ns1:revogadoPor ns1:Doc_999_20260430 .
 
-ns1:nova_entidade_em a ns1:EntidadeEmissora ;
-    ns1:nome "nova entidade em" .
+ns1:Doc_7087_2024_20240412
+ns1:revogadoPor ns1:Doc_422_20260514 .
 
-ns1:nova_entidade_local a ns1:EntidadeLocal,
-        ns1:OrgaoSoberano ;
-    ns1:nome "nova entidade local" .
+ns1:Doc_7091_2024_20240412
+ns1:revogadoPor ns1:Doc_12_20260516 .
 
-ns1:novaclasse rdfs:label "rotulo"@pt ;
-    rdfs:subClassOf ns2:Anuncio .
+ns1:Doc_7095_2024_20240412
+ns1:revogadoPor ns1:Doc_121_20260519 .
 
-ns1:novaclasselei rdfs:label "nova classe lei"@pt ;
-    rdfs:subClassOf ns2:Lei .
+# ============================================================
 
-ns1:teste a ns1:ola ;
-    ns1:nome "teste" .
+# CLASSES OWL PERSONALIZADAS
 
-ns1:teste123 rdfs:label "teste12"@pt ;
-    rdfs:subClassOf ns2:AvisoExtrato .
+#
 
-<http://dre.pt/recurso/AssembleiaRepublica> a ns2:OrgaoSoberano ;
-    rdfs:label "Assembleia da República"@pt ;
-    ns2:nomeEntidade "Assembleia da República" .
+# IMPORTANTE:
 
-<http://dre.pt/recurso/GovRegiaoAcores> a ns2:EntidadeRegional ;
-    rdfs:label "Governo Regional dos Açores"@pt ;
-    ns2:nomeEntidade "Governo Regional dos Açores" .
+# As classes ficam em http://dre.pt/ontologia#
 
-<http://dre.pt/recurso/GovRegiaoMadeira> a ns2:EntidadeRegional ;
-    rdfs:label "Governo Regional da Madeira"@pt ;
-    ns2:nomeEntidade "Governo Regional da Madeira" .
+# e são explicitamente declaradas como owl:Class.
 
-<http://dre.pt/recurso/MinisterioAdministracaoInterna> a ns2:Ministerio ;
-    rdfs:label "Ministério da Administração Interna"@pt ;
-    ns2:nomeEntidade "Ministério da Administração Interna" .
+# ============================================================
 
-<http://dre.pt/recurso/MinisterioDefesaNacional> a ns2:Ministerio ;
-    rdfs:label "Ministério da Defesa Nacional"@pt ;
-    ns2:nomeEntidade "Ministério da Defesa Nacional" .
+ns2:classe1
+a owl:Class ;
+rdfs:label "classe 1"@pt ;
+rdfs:subClassOf ns2:AtoNormativo .
 
-<http://dre.pt/recurso/MinisterioEducacao> a ns2:Ministerio ;
-    rdfs:label "Ministério da Educação"@pt ;
-    ns2:nomeEntidade "Ministério da Educação" .
+ns2:novaclasse
+a owl:Class ;
+rdfs:label "rotulo"@pt ;
+rdfs:subClassOf ns2:Anuncio .
 
-<http://dre.pt/recurso/MinisterioFinancas> a ns2:Ministerio ;
-    rdfs:label "Ministério das Finanças"@pt ;
-    ns2:nomeEntidade "Ministério das Finanças" .
+ns2:novaclasselei
+a owl:Class ;
+rdfs:label "nova classe lei"@pt ;
+rdfs:subClassOf ns2:Lei .
 
-<http://dre.pt/recurso/MinisterioJustica> a ns2:Ministerio ;
-    rdfs:label "Ministério da Justiça"@pt ;
-    ns2:nomeEntidade "Ministério da Justiça" .
+ns2:teste123
+a owl:Class ;
+rdfs:label "teste12"@pt ;
+rdfs:subClassOf ns2:AvisoExtrato .
 
-<http://dre.pt/recurso/MinisterioNegociosEstrangeiros> a ns2:Ministerio ;
-    rdfs:label "Ministério dos Negócios Estrangeiros"@pt ;
-    ns2:nomeEntidade "Ministério dos Negócios Estrangeiros" .
+ns2:ola
+a owl:Class ;
+rdfs:label "olá ola"@pt ;
+rdfs:subClassOf ns2:Ministerio .
 
-<http://dre.pt/recurso/MinisterioObrasPublicas> a ns2:Ministerio ;
-    rdfs:label "Ministério das Obras Públicas"@pt ;
-    ns2:nomeEntidade "Ministério das Obras Públicas" .
+# ============================================================
 
-<http://dre.pt/recurso/MinisterioTrabalho> a ns2:Ministerio ;
-    rdfs:label "Ministério do Trabalho"@pt ;
-    ns2:nomeEntidade "Ministério do Trabalho" .
+# ENTIDADES PERSONALIZADAS
 
-<http://dre.pt/recurso/PresidenciaRepublica> a ns2:OrgaoSoberano ;
-    rdfs:label "Presidência da República"@pt ;
-    ns2:nomeEntidade "Presidência da República" .
+# ============================================================
 
-<http://dre.pt/recurso/SerieI> a ns2:SerieDR ;
-    rdfs:label "Série I do Diário da República"@pt ;
-    ns2:serie 1 ;
-    rdfs:comment "Publica atos normativos de maior força jurídica: leis, decretos-lei, portarias, etc."@pt .
+ns1:ent123
+a ns2:EntidadeEmissora,
+ns2:EntidadePublicaEmpresarial,
+ns2:OrgaoSoberano ;
+ns1:emitiu ns1:Doc_121_20260519 ;
+ns1:nome "ent123" .
 
-<http://dre.pt/recurso/SerieII> a ns2:SerieDR ;
-    rdfs:label "Série II do Diário da República"@pt ;
-    ns2:serie 2 ;
-    rdfs:comment "Publica atos administrativos: avisos, despachos, deliberações, anúncios, etc."@pt .
+ns1:nova_entidade_1
+a ns2:Ministerio ;
+ns1:nome "nova entidade 1" .
 
-<http://dre.pt/recurso/SerieIII> a ns2:SerieDR ;
-    rdfs:label "Série III do Diário da República"@pt ;
-    ns2:serie 3 ;
-    rdfs:comment "Publica atos de autarquias locais e outras entidades."@pt .
+ns1:nova_entidade_em
+a ns2:EntidadeEmissora ;
+ns1:nome "nova entidade em" .
 
-<http://dre.pt/recurso/TribunalConstitucional> a ns2:Tribunal ;
-    rdfs:label "Tribunal Constitucional"@pt ;
-    ns2:nomeEntidade "Tribunal Constitucional" .
+ns1:nova_entidade_local
+a ns2:EntidadeLocal,
+ns2:OrgaoSoberano ;
+ns1:nome "nova entidade local" .
 
-ns1:1._a_Vara_Criminal_do_Tribunal_da_Comarca_do_Porto ns1:emitiu ns1:Doc_121_20260514 .
+# Instância da classe personalizada "ola"
 
-ns1:Doc_11_20260515 a ns2:Declaracao ;
-    ns1:dataPublicacao "2026-05-15"^^xsd:date ;
-    ns1:emitidoPor ns1:Minist%C3%A9rio_da_Administra%C3%A7%C3%A3o_Interna ;
-    ns1:numero "11"^^xsd:string ;
-    ns1:numeroDR "21"^^xsd:string ;
-    ns1:sumario "PDF Test File Congratulations, your comput er is equipped with a PDF (Portable Document Format) reader! You should be able to view any of the PDF documents and forms available on our site. PDF forms a..."^^xsd:string .
+ns1:teste
+a ns2:ola ;
+ns1:nome "teste" .
 
-ns1:Doc_121_20260427 a ns2:Constituicao ;
-    ns1:dataPublicacao "2026-04-27"^^xsd:date ;
-    ns1:emitidoPor ns1:Minist%C3%A9rio_da_Defesa_Nacional ;
-    ns1:numero "121"^^xsd:string ;
-    ns1:numeroDR "121"^^xsd:string ;
-    ns1:sumario "PDF Test File Congratulations, your comput er is equipped with a PDF (Portable Document Format) reader! You should be able to view any of the PDF documents and forms available on our site. PDF forms a..."^^xsd:string .
+# ============================================================
 
-ns1:Doc_121_20260506 a ns2:DecretoLei ;
-    ns1:dataPublicacao "2026-05-06"^^xsd:date ;
-    ns1:emitidoPor ns1:Minist%C3%A9rio_da_Sa%C3%BAde ;
-    ns1:numero "121"^^xsd:string ;
-    ns1:numeroDR "121"^^xsd:string ;
-    ns1:sumario "decreto lei"^^xsd:string ;
-    ns1:urlPDF "https://files.diariodarepublica.pt/1s/2024/03/05600/0000200011.pdf"^^xsd:anyURI .
+# ENTIDADES BASE
 
-ns1:Doc_212_20260502 a ns2:Declaracao ;
-    ns1:dataPublicacao "2026-05-02"^^xsd:date ;
-    ns1:emitidoPor ns1:Minist%C3%A9rio_da_Educa%C3%A7%C3%A3o ;
-    ns1:numero "212"^^xsd:string ;
-    ns1:numeroDR "121121"^^xsd:string ;
-    ns1:sumario "isot é teste"^^xsd:string ;
-    ns1:urlPDF "https://www.orimi.com/pdf-test.pdf"^^xsd:anyURI .
+# ============================================================
 
-ns1:Doc_422_20260513 a ns1:Decreto ;
-    ns1:dataPublicacao "2026-05-13"^^xsd:date ;
-    ns1:emitidoPor ns1:Educa%C3%A7%C3%A3o%2C_Trabalho%2C_Solidariedade_e_Seguran%C3%A7a_Social_e_Entidades_de_Utilidade_P%C3%BAblica_Desportiva_-_Instituto_Portugu%C3%AAs_do_Desporto_e_Juventude%2C_I._P.%2C_Instituto_Nacional_para_a_Reabilita%C3%A7%C3%A3o%2C_I._P.%2C_e_Federa%C3%A7%C3%A3o_Portuguesa_de_Actividades_Subaqu%C3%A1ticas ;
-    ns1:numero "422"^^xsd:string ;
-    ns1:sumario "PDF Test File Congratulations, your comput er is equipped with a PDF (Portable Document Format) reader! You should be able to view any of the PDF documents and forms available on our site. PDF forms a..."^^xsd:string .
+http://dre.pt/recurso/AssembleiaRepublica
+a ns2:OrgaoSoberano ;
+rdfs:label "Assembleia da República"@pt ;
+ns2:nomeEntidade "Assembleia da República" .
 
-ns1:Doc_sqs_20260513 a ns2:Decreto ;
-    ns1:dataPublicacao "2026-05-13"^^xsd:date ;
-    ns1:emitidoPor ns1:Minist%C3%A9rio_da_Educa%C3%A7%C3%A3o ;
-    ns1:numero "sqs"^^xsd:string ;
-    ns1:sumario "PDF Test File Congratulations, your comput er is equipped with a PDF (Portable Document Format) reader! You should be able to view any of the PDF documents and forms available on our site. PDF forms a..."^^xsd:string .
+http://dre.pt/recurso/GovRegiaoAcores
+a ns2:EntidadeRegional ;
+rdfs:label "Governo Regional dos Açores"@pt ;
+ns2:nomeEntidade "Governo Regional dos Açores" .
 
-ns1:Educa%C3%A7%C3%A3o%2C_Trabalho%2C_Solidariedade_e_Seguran%C3%A7a_Social_e_Entidades_de_Utilidade_P%C3%BAblica_Desportiva_-_Instituto_Portugu%C3%AAs_do_Desporto_e_Juventude%2C_I._P.%2C_Instituto_Nacional_para_a_Reabilita%C3%A7%C3%A3o%2C_I._P.%2C_e_Federa%C3%A7%C3%A3o_Portuguesa_de_Actividades_Subaqu%C3%A1ticas ns1:emitiu ns1:Doc_422_20260513 .
+http://dre.pt/recurso/GovRegiaoMadeira
+a ns2:EntidadeRegional ;
+rdfs:label "Governo Regional da Madeira"@pt ;
+ns2:nomeEntidade "Governo Regional da Madeira" .
 
-ns1:Minist%C3%A9rio_da_Administra%C3%A7%C3%A3o_Interna ns1:emitiu ns1:Doc_11_20260515 .
+http://dre.pt/recurso/MinisterioAdministracaoInterna
+a ns2:Ministerio ;
+rdfs:label "Ministério da Administração Interna"@pt ;
+ns2:nomeEntidade "Ministério da Administração Interna" .
 
-ns1:Minist%C3%A9rio_da_Defesa_Nacional ns1:emitiu ns1:Doc_121_20260427 .
+http://dre.pt/recurso/MinisterioDefesaNacional
+a ns2:Ministerio ;
+rdfs:label "Ministério da Defesa Nacional"@pt ;
+ns2:nomeEntidade "Ministério da Defesa Nacional" .
 
-ns1:Minist%C3%A9rio_da_Sa%C3%BAde ns1:emitiu ns1:Doc_121_20260506 .
+http://dre.pt/recurso/MinisterioEducacao
+a ns2:Ministerio ;
+rdfs:label "Ministério da Educação"@pt ;
+ns2:nomeEntidade "Ministério da Educação" .
 
-ns1:Presid%C3%AAncia_da_Rep%C3%BAblica ns1:emitiu ns1:Doc_121_20260514 .
+http://dre.pt/recurso/MinisterioFinancas
+a ns2:Ministerio ;
+rdfs:label "Ministério das Finanças"@pt ;
+ns2:nomeEntidade "Ministério das Finanças" .
 
-ns1:ola rdfs:label "olá ola"@pt ;
-    rdfs:subClassOf <http://dre.pt/recurso/MinisterioSaude> .
+http://dre.pt/recurso/MinisterioJustica
+a ns2:Ministerio ;
+rdfs:label "Ministério da Justiça"@pt ;
+ns2:nomeEntidade "Ministério da Justiça" .
 
-<http://dre.pt/recurso/MinisterioSaude> a ns2:Ministerio ;
-    rdfs:label "Ministério da Saúde"@pt ;
-    ns2:nomeEntidade "Ministério da Saúde" .
+http://dre.pt/recurso/MinisterioNegociosEstrangeiros
+a ns2:Ministerio ;
+rdfs:label "Ministério dos Negócios Estrangeiros"@pt ;
+ns2:nomeEntidade "Ministério dos Negócios Estrangeiros" .
 
-ns1:Doc_121_20260514 a ns2:AtoInformativo,
-        ns1:Lei ;
-    ns1:dataPublicacao "2026-05-14"^^xsd:date ;
-    ns1:emitidoPor ns1:1._a_Vara_Criminal_do_Tribunal_da_Comarca_do_Porto,
-        ns1:Presid%C3%AAncia_da_Rep%C3%BAblica ;
-    ns1:numero "121"^^xsd:string ;
-    ns1:numeroDR "11"^^xsd:string,
-        "121"^^xsd:string ;
-    ns1:sumario "PDF Test File Congratulations, your comput er is equipped with a PDF (Portable Document Format) reader! You should be able to view any of the PDF documents and forms available on our site. PDF forms a..."^^xsd:string,
-        "wqwq"^^xsd:string .
+http://dre.pt/recurso/MinisterioObrasPublicas
+a ns2:Ministerio ;
+rdfs:label "Ministério das Obras Públicas"@pt ;
+ns2:nomeEntidade "Ministério das Obras Públicas" .
 
-ns1:Minist%C3%A9rio_da_Educa%C3%A7%C3%A3o ns1:emitiu ns1:Doc_212_20260502,
-        ns1:Doc_sqs_20260513 .
+http://dre.pt/recurso/MinisterioTrabalho
+a ns2:Ministerio ;
+rdfs:label "Ministério do Trabalho"@pt ;
+ns2:nomeEntidade "Ministério do Trabalho" .
 
+http://dre.pt/recurso/PresidenciaRepublica
+a ns2:OrgaoSoberano ;
+rdfs:label "Presidência da República"@pt ;
+ns2:nomeEntidade "Presidência da República" .
+
+http://dre.pt/recurso/TribunalConstitucional
+a ns2:Tribunal ;
+rdfs:label "Tribunal Constitucional"@pt ;
+ns2:nomeEntidade "Tribunal Constitucional" .
+
+http://dre.pt/recurso/MinisterioSaude
+a ns2:Ministerio ;
+rdfs:label "Ministério da Saúde"@pt ;
+ns2:nomeEntidade "Ministério da Saúde" .
+
+# ============================================================
+
+# SÉRIES DO DIÁRIO DA REPÚBLICA
+
+# ============================================================
+
+http://dre.pt/recurso/SerieI
+a ns2:SerieDR ;
+rdfs:label "Série I do Diário da República"@pt ;
+ns2:serie 1 ;
+rdfs:comment
+"Publica atos normativos de maior força jurídica: leis, decretos-lei, portarias, etc."@pt .
+
+http://dre.pt/recurso/SerieII
+a ns2:SerieDR ;
+rdfs:label "Série II do Diário da República"@pt ;
+ns2:serie 2 ;
+rdfs:comment
+"Publica atos administrativos: avisos, despachos, deliberações, anúncios, etc."@pt .
+
+http://dre.pt/recurso/SerieIII
+a ns2:SerieDR ;
+rdfs:label "Série III do Diário da República"@pt ;
+ns2:serie 3 ;
+rdfs:comment
+"Publica atos de autarquias locais e outras entidades."@pt .
+
+# ============================================================
+
+# OUTRAS ENTIDADES EMISSORAS
+
+# ============================================================
+
+ns1:1._a_Vara_Criminal_do_Tribunal_da_Comarca_do_Porto
+ns1:emitiu ns1:Doc_121_20260514 .
+
+ns1:Educa%C3%A7%C3%A3o%2C_Trabalho%2C_Solidariedade_e_Seguran%C3%A7a_Social_e_Entidades_de_Utilidade_P%C3%BAblica_Desportiva_-_Instituto_Portugu%C3%AAs_do_Desporto_e_Juventude%2C_I._P.%2C_Instituto_Nacional_para_a_Reabilita%C3%A7%C3%A3o%2C_I._P.%2C_e_Federa%C3%A7%C3%A3o_Portuguesa_de_Actividades_Subaqu%C3%A1ticas
+ns1:emitiu ns1:Doc_422_20260513 .
+
+ns1:Minist%C3%A9rio_da_Administra%C3%A7%C3%A3o_Interna
+ns1:emitiu ns1:Doc_11_20260515 .
+
+ns1:Minist%C3%A9rio_da_Defesa_Nacional
+ns1:emitiu ns1:Doc_121_20260427 .
+
+ns1:Minist%C3%A9rio_da_Sa%C3%BAde
+ns1:emitiu ns1:Doc_121_20260506 .
+
+ns1:Presid%C3%AAncia_da_Rep%C3%BAblica
+ns1:emitiu ns1:Doc_121_20260514 .
+
+ns1:Minist%C3%A9rio_da_Educa%C3%A7%C3%A3o
+ns1:emitiu ns1:Doc_212_20260502,
+ns1:Doc_sqs_20260513 .
+
+# ============================================================
+
+# DOCUMENTOS
+
+# ============================================================
+
+ns1:Doc_11_20260515
+a ns2:Declaracao ;
+ns1:dataPublicacao "2026-05-15"^^xsd:date ;
+ns1:emitidoPor
+ns1:Minist%C3%A9rio_da_Administra%C3%A7%C3%A3o_Interna ;
+ns1:numero "11"^^xsd:string ;
+ns1:numeroDR "21"^^xsd:string ;
+ns1:sumario
+"PDF Test File Congratulations, your comput er is equipped with a PDF (Portable Document Format) reader! You should be able to view any of the PDF documents and forms available on our site. PDF forms a..."^^xsd:string .
+
+ns1:Doc_121_20260427
+a ns2:Constituicao ;
+ns1:dataPublicacao "2026-04-27"^^xsd:date ;
+ns1:emitidoPor
+ns1:Minist%C3%A9rio_da_Defesa_Nacional ;
+ns1:numero "121"^^xsd:string ;
+ns1:numeroDR "121"^^xsd:string ;
+ns1:sumario
+"PDF Test File Congratulations, your comput er is equipped with a PDF (Portable Document Format) reader! You should be able to view any of the PDF documents and forms available on our site. PDF forms a..."^^xsd:string .
+
+ns1:Doc_121_20260506
+a ns2:DecretoLei ;
+ns1:dataPublicacao "2026-05-06"^^xsd:date ;
+ns1:emitidoPor
+ns1:Minist%C3%A9rio_da_Sa%C3%BAde ;
+ns1:numero "121"^^xsd:string ;
+ns1:numeroDR "121"^^xsd:string ;
+ns1:sumario "decreto lei"^^xsd:string ;
+ns1:urlPDF
+"https://files.diariodarepublica.pt/1s/2024/03/05600/0000200011.pdf"^^xsd:anyURI .
+
+ns1:Doc_212_20260502
+a ns2:Declaracao ;
+ns1:dataPublicacao "2026-05-02"^^xsd:date ;
+ns1:emitidoPor
+ns1:Minist%C3%A9rio_da_Educa%C3%A7%C3%A3o ;
+ns1:numero "212"^^xsd:string ;
+ns1:numeroDR "121121"^^xsd:string ;
+ns1:sumario "isot é teste"^^xsd:string ;
+ns1:urlPDF
+"https://www.orimi.com/pdf-test.pdf"^^xsd:anyURI .
+
+ns1:Doc_422_20260513
+a ns2:Decreto ;
+ns1:dataPublicacao "2026-05-13"^^xsd:date ;
+ns1:emitidoPor
+ns1:Educa%C3%A7%C3%A3o%2C_Trabalho%2C_Solidariedade_e_Seguran%C3%A7a_Social_e_Entidades_de_Utilidade_P%C3%BAblica_Desportiva_-_Instituto_Portugu%C3%AAs_do_Desporto_e_Juventude%2C_I._P.%2C_Instituto_Nacional_para_a_Reabilita%C3%A7%C3%A3o%2C_I._P.%2C_e_Federa%C3%A7%C3%A3o_Portuguesa_de_Actividades_Subaqu%C3%A1ticas ;
+ns1:numero "422"^^xsd:string ;
+ns1:sumario
+"PDF Test File Congratulations, your comput er is equipped with a PDF (Portable Document Format) reader! You should be able to view any of the PDF documents and forms available on our site. PDF forms a..."^^xsd:string .
+
+ns1:Doc_sqs_20260513
+a ns2:Decreto ;
+ns1:dataPublicacao "2026-05-13"^^xsd:date ;
+ns1:emitidoPor
+ns1:Minist%C3%A9rio_da_Educa%C3%A7%C3%A3o ;
+ns1:numero "sqs"^^xsd:string ;
+ns1:sumario
+"PDF Test File Congratulations, your comput er is equipped with a PDF (Portable Document Format) reader! You should be able to view any of the PDF documents and forms available on our site. PDF forms a..."^^xsd:string .
+
+ns1:Doc_121_20260514
+a ns2:AtoInformativo,
+ns2:Lei ;
+ns1:dataPublicacao "2026-05-14"^^xsd:date ;
+ns1:emitidoPor
+ns1:1._a_Vara_Criminal_do_Tribunal_da_Comarca_do_Porto,
+ns1:Presid%C3%AAncia_da_Rep%C3%BAblica ;
+ns1:numero "121"^^xsd:string ;
+ns1:numeroDR
+"11"^^xsd:string,
+"121"^^xsd:string ;
+ns1:sumario
+"PDF Test File Congratulations, your comput er is equipped with a PDF (Portable Document Format) reader! You should be able to view any of the PDF documents and forms available on our site. PDF forms a..."^^xsd:string,
+"wqwq"^^xsd:string .
