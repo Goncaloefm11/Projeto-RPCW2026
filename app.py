@@ -1339,3 +1339,5 @@ if __name__ == "__main__":
     DB_PATH = args.db
     print(f"🇵🇹 DRE Ontologia — http://{args.host}:{args.port}")
     app.run(host=args.host, port=args.port, debug=False)
+
+    python app.py --db dre.db --host 127.0.0.1 --port 5000
